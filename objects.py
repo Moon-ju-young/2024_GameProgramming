@@ -1,5 +1,6 @@
 import pygame
 from math import dist
+from main import WIDTH, HEIGHT
 
 GRAVITY = 50
 BlackBGImage = pygame.image.load("black_bg.png")
@@ -50,3 +51,9 @@ class SpaceShip:
     def update(self) -> None:
         self.x += self.velx
         self.y += self.vely
+    
+    def blackhole_collision(self, b:BlackHole) -> bool:
+        return dist((self.x,self.y),(b.x,b.y)) < (10+b.rad)
+    
+    def wall_collision(self) -> bool:
+        return (self.x < 0 or self.y < 0 or self.x > WIDTH or self.y > HEIGHT)
