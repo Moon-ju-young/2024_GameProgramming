@@ -1,3 +1,4 @@
+import pygame
 from objects import BlackHole
 import setting as s
 
@@ -13,7 +14,9 @@ class Stage:
             for i in self.stage[self.PresentStage]:
                 i.show()
         elif self.PresentStage == s.STAGEMAIN:
-            pass
+            title = pygame.font.SysFont("Bauhaus 93", 80).render("Space Voyage",True,(255,255,255))
+            new_rect = title.get_rect(center=(s.WIDTH/2,s.HEIGHT/4))
+            self.screen.blit(title,new_rect)
         elif self.PresentStage == s.STAGELIST:
             pass
         elif self.PresentStage == s.STAGEALLCLEAR:
