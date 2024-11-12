@@ -10,7 +10,7 @@ GameQuit = False
 clock = pygame.time.Clock()
 
 pygame.init()                                       #초기화
-pygame.display.set_caption("Avoid Blackhole")       #제목
+pygame.display.set_caption("Space Voyage")          #제목
 screen = pygame.display.set_mode((s.WIDTH,s.HEIGHT))#화면 크기
 stage = Stage(screen)                               #스테이지 구분
 
