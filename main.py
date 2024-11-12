@@ -1,12 +1,8 @@
 import pygame
 from math import sin, cos, radians
-from objects import BlackHole, SpaceShip
-
-WIDTH = 800
-HEIGHT = 800
-FPS = 60
-
-SPACESHIP_ACCLERATION = 0.0005
+import setting as s
+from stages import Stage
+from objects import SpaceShip
 
 DARK_BLUE = (50, 50, 100)
 
@@ -15,12 +11,13 @@ clock = pygame.time.Clock()
 
 pygame.init()                                       #초기화
 pygame.display.set_caption("Avoid Blackhole")       #제목
-screen = pygame.display.set_mode((WIDTH,HEIGHT))    #화면 크기
+screen = pygame.display.set_mode((s.WIDTH,s.HEIGHT))#화면 크기
+stage = Stage(screen)                               #스테이지 구분
 
-player = SpaceShip(500,500,screen)
+player = SpaceShip(s.WIDTH-50,s.HEIGHT-50,screen)
 
 while not GameQuit:
-    clock.tick(FPS)
+    clock.tick(s.FPS)
 
     for event in pygame.event.get(): 
         if event.type == pygame.QUIT: 
@@ -35,14 +32,15 @@ while not GameQuit:
         player.angle -= milliseconds * 0.1
     player.angle %= 360
     if keys[pygame.K_UP]:
-        player.velx -= sin(radians(player.angle)) * SPACESHIP_ACCLERATION * milliseconds
-        player.vely -= cos(radians(player.angle)) * SPACESHIP_ACCLERATION * milliseconds
+        player.velx -= sin(radians(player.angle)) * s.SPACESHIP_ACCLERATION * milliseconds
+        player.vely -= cos(radians(player.angle)) * s.SPACESHIP_ACCLERATION * milliseconds
     elif keys[pygame.K_DOWN]:
-        player.velx += sin(radians(player.angle)) * SPACESHIP_ACCLERATION * milliseconds
-        player.vely += cos(radians(player.angle)) * SPACESHIP_ACCLERATION * milliseconds
+        player.velx += sin(radians(player.angle)) * s.SPACESHIP_ACCLERATION * milliseconds
+        player.vely += cos(radians(player.angle)) * s.SPACESHIP_ACCLERATION * milliseconds
 
     screen.fill(DARK_BLUE)
     player.update()
+    stage.show()
     player.show()
     
     pygame.display.flip()

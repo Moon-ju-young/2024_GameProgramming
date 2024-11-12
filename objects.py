@@ -1,8 +1,7 @@
 import pygame
 from math import dist
-from main import WIDTH, HEIGHT
+import setting as s
 
-GRAVITY = 50
 BlackBGImage = pygame.image.load("black_bg.png")
 SpaceShipImage = pygame.image.load("spaceship.png")             #기본크기 80x80
 SpaceShipImage = pygame.transform.scale(SpaceShipImage, (40,40))#크기 조정
@@ -26,7 +25,7 @@ class BlackHole:
     def gravity_acc(self, x:int, y:int) -> tuple:
         d = dist((x,y), (self.x,self.y))
         if d < self.ran:
-            g = GRAVITY * (self.ran - d) / self.ran
+            g = s.GRAVITY * (self.ran - d) / self.ran
             xg = g * (self.x - x) / d
             yg = g * (self.y - y) / d
             return (xg, yg)
@@ -56,4 +55,4 @@ class SpaceShip:
         return dist((self.x,self.y),(b.x,b.y)) < (10+b.rad)
     
     def wall_collision(self) -> bool:
-        return (self.x < 0 or self.y < 0 or self.x > WIDTH or self.y > HEIGHT)
+        return (self.x < 0 or self.y < 0 or self.x > s.WIDTH or self.y > s.HEIGHT)
