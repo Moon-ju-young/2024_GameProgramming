@@ -29,7 +29,16 @@ while not GameQuit:
         elif event.type == pygame.KEYDOWN:      #key 단일 입력
             if stage.PresentStage == s.STAGEMAIN:
                 if event.key == pygame.K_SPACE:
-                    stage.PresentStage = s.STAGELIST
+                    if stage.point == 0:
+                        stage.PresentStage = s.STAGELIST
+                    elif stage.point == 1:
+                        pass    ######################################
+                    elif stage.point == 2:
+                        GameQuit = True 
+                if event.key == pygame.K_UP:
+                    stage.point = (stage.point+2)%3
+                if event.key == pygame.K_DOWN:
+                    stage.point = (stage.point+1)%3
 
             elif stage.PresentStage == s.STAGELIST:
                 point = 1   #커서?가 가리키는 스테이지

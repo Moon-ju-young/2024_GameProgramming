@@ -9,6 +9,7 @@ class Stage:
         self.PresentStage = s.STAGEMAIN
         self.StageList = [0]
         self.StageList.append( [BlackHole(s.WIDTH/2,s.HEIGHT/2,100,self.screen)] )
+        self.point = 0      # main/list에서 가리키는 선택지
 
 
     def show(self) -> None:
@@ -22,10 +23,14 @@ class Stage:
             self.screen.blit(title,new_rect)
 
             location = [(s.WIDTH/2,s.HEIGHT*5/8),(s.WIDTH/2,s.HEIGHT*3/4),(s.WIDTH/2,s.HEIGHT*7/8)]
+            box = pygame.Rect(0,0,10+s.WIDTH/3,10+s.HEIGHT/10)
+            box.center = location[self.point]
+            pygame.draw.rect(self.screen,(255, 255, 255),box)
             box = pygame.Rect(0,0,s.WIDTH/3,s.HEIGHT/10)
             for i in location:
                 box.center = i
                 pygame.draw.rect(self.screen,(100, 100, 200),box)
+
             text = [] 
             text.append(pygame.font.SysFont("휴먼 엑스포", 40).render("Game Start",True,(255,255,255)))
             text.append(pygame.font.SysFont("휴먼 엑스포", 40).render("How to Play",True,(255,255,255)))
