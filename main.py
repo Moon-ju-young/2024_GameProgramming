@@ -20,6 +20,8 @@ while not GameQuit:
     clock.tick(s.FPS)
     milliseconds = clock.get_time()
 
+    screen.fill(DARK_BLUE)
+
     for event in pygame.event.get(): 
         if event.type == pygame.QUIT:           #종료 시
             GameQuit = True 
@@ -53,9 +55,9 @@ while not GameQuit:
             player.vely += cos(radians(player.angle)) * s.SPACESHIP_ACCLERATION * milliseconds
     
 
-    screen.fill(DARK_BLUE)
     player.update()
     stage.show()
-    player.show()
+    if stage.PresentStage > 0:
+        player.show()
     
     pygame.display.flip()
