@@ -51,8 +51,5 @@ class SpaceShip:
         self.x += self.velx
         self.y += self.vely
     
-    def blackhole_collision(self, b:BlackHole) -> bool:
-        return dist((self.x,self.y),(b.x,b.y)) < (10+b.rad)
-    
     def wall_collision(self) -> bool:
         return (self.x < 0 or self.y < 0 or self.x > s.WIDTH or self.y > s.HEIGHT)

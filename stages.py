@@ -1,5 +1,6 @@
 import pygame
-from objects import BlackHole
+from math import dist
+from objects import BlackHole, SpaceShip
 import setting as s
 
 
@@ -8,7 +9,7 @@ class Stage:
         self.screen = sc
         self.PresentStage = s.STAGEMAIN
         self.StageList = [0]
-        self.StageList.append( [BlackHole(s.WIDTH/2,s.HEIGHT/2,100,self.screen)] )
+        self.StageList.append( [BlackHole(s.WIDTH/2,s.HEIGHT/2,200,self.screen)] )
         self.point = 0      # main/list에서 가리키는 선택지
 
 
@@ -44,3 +45,11 @@ class Stage:
 
         elif self.PresentStage == s.STAGEALLCLEAR:      #올클리어
             pass
+
+    
+    def blackhole_collision(self, s:SpaceShip) -> bool:
+        for i in self.StageList[self.PresentStage]:
+            if dist((s.x,s.y),(i.x,i.y)) < (10+i.rad):
+                return True
+        return False
+        

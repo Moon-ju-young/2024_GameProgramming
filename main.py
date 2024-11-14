@@ -30,6 +30,7 @@ while not GameQuit:
             if stage.PresentStage == s.STAGEMAIN:
                 if event.key == pygame.K_SPACE:
                     if stage.point == 0:
+                        stage.point = 1
                         stage.PresentStage = s.STAGELIST
                     elif stage.point == 1:
                         pass    ######################################
@@ -49,6 +50,7 @@ while not GameQuit:
 
 
     if stage.PresentStage > 0:
+
         keys = pygame.key.get_pressed()         #key 지속 입력
 
         if keys[pygame.K_LEFT]:
@@ -67,6 +69,12 @@ while not GameQuit:
     player.update()
     stage.show()
     if stage.PresentStage > 0:
+        if player.wall_collision() or stage.blackhole_collision(player): #충돌 여부
+            player = SpaceShip(s.WIDTH-50,s.HEIGHT-50,screen)
+            player.show()
+            pygame.display.flip()
+            pygame.time.delay(500)
         player.show()
     
     pygame.display.flip()
+        
