@@ -21,6 +21,19 @@ class Stage:
             new_rect = title.get_rect(center=(s.WIDTH/2,s.HEIGHT/4))
             self.screen.blit(title,new_rect)
 
+            location = [(s.WIDTH/2,s.HEIGHT*5/8),(s.WIDTH/2,s.HEIGHT*3/4),(s.WIDTH/2,s.HEIGHT*7/8)]
+            box = pygame.Rect(0,0,s.WIDTH/3,s.HEIGHT/10)
+            for i in location:
+                box.center = i
+                pygame.draw.rect(self.screen,(100, 100, 200),box)
+            text = [] 
+            text.append(pygame.font.SysFont("휴먼 엑스포", 40).render("Game Start",True,(255,255,255)))
+            text.append(pygame.font.SysFont("휴먼 엑스포", 40).render("How to Play",True,(255,255,255)))
+            text.append(pygame.font.SysFont("휴먼 엑스포", 40).render("Quit",True,(255,255,255)))
+            for i in range(3):
+                new_rect = text[i].get_rect(center=location[i])
+                self.screen.blit(text[i],new_rect)
+
         elif self.PresentStage == s.STAGELIST:          #스테이지 리스트
             pass
 
