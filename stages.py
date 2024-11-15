@@ -10,6 +10,7 @@ class Stage:
         self.PresentStage = s.STAGEMAIN
         self.StageList = [0]
         self.StageList.append( [BlackHole(s.WIDTH/2,s.HEIGHT/2,200,self.screen)] )
+        self.StageList.append( [BlackHole(s.WIDTH/4,s.HEIGHT/2,200,self.screen), BlackHole(s.WIDTH*3/4,s.HEIGHT/2,200,self.screen)] )
         self.point = 0      # main/list에서 가리키는 선택지
 
 
