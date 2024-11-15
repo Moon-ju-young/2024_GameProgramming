@@ -28,10 +28,10 @@ while not GameQuit:
             GameQuit = True 
 
         elif event.type == pygame.KEYDOWN:      #key 단일 입력
+            # main page
             if stage.PresentStage == s.STAGEMAIN:
-                if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_SPACE or event.key == pygame.K_RETURN: #엔터키
                     if stage.point == 0:
-                        stage.point = 1
                         stage.PresentStage = s.STAGELIST
                     elif stage.point == 1:
                         pass    ######################################
@@ -42,16 +42,26 @@ while not GameQuit:
                 if event.key == pygame.K_DOWN:
                     stage.point = (stage.point+1)%3
 
+            # list page
             elif stage.PresentStage == s.STAGELIST:
-                point = 1   #커서?가 가리키는 스테이지
                 if event.key == pygame.K_z:
                     stage.PresentStage = s.STAGEMAIN
-                elif event.key == pygame.K_SPACE:
-                    stage.PresentStage = point
+                elif event.key == pygame.K_SPACE or event.key == pygame.K_RETURN: #엔터키
+                    player = SpaceShip(s.WIDTH-50,s.HEIGHT-50,screen)
+                    stage.PresentStage = stage.point+1
+                elif event.key == pygame.K_LEFT:
+                    stage.point = (stage.point+5)%6
+                elif event.key == pygame.K_RIGHT:
+                    stage.point = (stage.point+1)%6
+                elif event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                    stage.point = (stage.point+3)%6    
 
 
     if stage.PresentStage > 0:
         keys = pygame.key.get_pressed()         #key 지속 입력
+        
+        if keys[pygame.K_z]:
+            stage.PresentStage = s.STAGELIST
 
         if keys[pygame.K_LEFT]:
             player.angle += milliseconds * 0.1
