@@ -53,3 +53,17 @@ class SpaceShip:
     
     def wall_collision(self) -> bool:
         return (self.x < 0 or self.y < 0 or self.x > s.WIDTH or self.y > s.HEIGHT)
+    
+
+class Destination:
+    def __init__(self, x, y, sc) -> None:
+        '''x y 좌표, Surface 입력'''
+        self.x = x
+        self.y = y
+        self.screen = sc
+
+    def show(self) -> None:
+        pygame.draw.circle(self.screen,(70, 200, 100),(self.x,self.y),20)
+
+    def arrive(self, s:SpaceShip) -> bool:
+        return dist((s.x,s.y),(self.x,self.y)) < 30

@@ -2,7 +2,7 @@ import pygame
 from math import sin, cos, radians
 import setting as s
 from stages import Stage
-from objects import SpaceShip
+from objects import SpaceShip, Destination
 
 DARK_BLUE = (50, 50, 100)
 
@@ -11,10 +11,11 @@ clock = pygame.time.Clock()
 
 pygame.init()                                       #초기화
 pygame.display.set_caption("Space Voyage")          #제목
+
 screen = pygame.display.set_mode((s.WIDTH,s.HEIGHT))#화면 크기
 stage = Stage(screen)                               #스테이지 구분
-
 player = SpaceShip(s.WIDTH-50,s.HEIGHT-50,screen)
+destination = Destination(100,100,screen)
 
 while not GameQuit:
     clock.tick(s.FPS)
@@ -50,7 +51,6 @@ while not GameQuit:
 
 
     if stage.PresentStage > 0:
-
         keys = pygame.key.get_pressed()         #key 지속 입력
 
         if keys[pygame.K_LEFT]:
@@ -67,13 +67,23 @@ while not GameQuit:
     
 
     player.update()
-    stage.show()
+    try:
+        stage.show()
+    except:
+        stage.PresentStage = s.STAGELIST
+        stage.show()
+
     if stage.PresentStage > 0:
+        stage.blackhole_pull(player)
+        destination.show()
         if player.wall_collision() or stage.blackhole_collision(player): #충돌 여부
             player = SpaceShip(s.WIDTH-50,s.HEIGHT-50,screen)
             player.show()
             pygame.display.flip()
             pygame.time.delay(500)
+        elif destination.arrive(player):
+            player = SpaceShip(s.WIDTH-50,s.HEIGHT-50,screen)
+            stage.PresentStage += 1
         player.show()
     
     pygame.display.flip()

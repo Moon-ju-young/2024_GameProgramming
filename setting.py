@@ -7,7 +7,7 @@ FPS = 60
 SPACESHIP_ACCLERATION = 0.0005
 
 #블랙홀 설정
-GRAVITY = 50
+GRAVITY = 0.5
 
 #스테이지 설정
 STAGEMAIN = -1

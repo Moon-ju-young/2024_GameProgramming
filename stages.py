@@ -9,8 +9,17 @@ class Stage:
         self.screen = sc
         self.PresentStage = s.STAGEMAIN
         self.StageList = [0]
-        self.StageList.append( [BlackHole(s.WIDTH/2,s.HEIGHT/2,200,self.screen)] )
         self.point = 0      # main/list에서 가리키는 선택지
+
+        self.StageList.append( [BlackHole(s.WIDTH/2,s.HEIGHT/2,200,self.screen)] )
+        self.StageList.append( [BlackHole(s.WIDTH/4,s.HEIGHT/2,200,self.screen), 
+                                BlackHole(s.WIDTH*3/4,s.HEIGHT/2,200,self.screen)] )
+        self.StageList.append( [BlackHole(s.WIDTH*2/3,s.HEIGHT/3,300,self.screen), 
+                                BlackHole(s.WIDTH/4,s.HEIGHT*3/4,100,self.screen)] )
+        self.StageList.append( [BlackHole(s.WIDTH/4,s.HEIGHT/4,150,self.screen),
+                                BlackHole(s.WIDTH*3/4,s.HEIGHT/4,150,self.screen), 
+                                BlackHole(s.WIDTH/4,s.HEIGHT*3/4,150,self.screen),
+                                BlackHole(s.WIDTH*3/4,s.HEIGHT*3/4,150,self.screen)] )
 
 
     def show(self) -> None:
@@ -52,4 +61,8 @@ class Stage:
             if dist((s.x,s.y),(i.x,i.y)) < (10+i.rad):
                 return True
         return False
-        
+    
+    def blackhole_pull(self, s:SpaceShip) -> None:
+        for i in self.StageList[self.PresentStage]:
+            s.velx += i.gravity_acc(s.x,s.y)[0]
+            s.vely += i.gravity_acc(s.x,s.y)[1]
