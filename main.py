@@ -34,7 +34,7 @@ while not GameQuit:
                     if stage.point == 0:
                         stage.PresentStage = s.STAGELIST
                     elif stage.point == 1:
-                        pass    ######################################
+                        stage.PresentStage = s.STAGEDESCRIPTION
                     elif stage.point == 2:
                         GameQuit = True 
                 if event.key == pygame.K_UP:
@@ -56,10 +56,15 @@ while not GameQuit:
                 elif event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                     stage.point = (stage.point+3)%6    
 
+            
+            elif stage.PresentStage == s.STAGEDESCRIPTION:
+                if event.key == pygame.K_z:
+                    stage.PresentStage = s.STAGEMAIN
+
 
     if stage.PresentStage > 0:
         keys = pygame.key.get_pressed()         #key 지속 입력
-        
+
         if keys[pygame.K_z]:
             stage.PresentStage = s.STAGELIST
 

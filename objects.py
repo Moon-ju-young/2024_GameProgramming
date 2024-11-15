@@ -2,8 +2,8 @@ import pygame
 from math import dist
 import setting as s
 
-BlackBGImage = pygame.image.load("black_bg.png")
-SpaceShipImage = pygame.image.load("spaceship.png")             #기본크기 80x80
+BlackBGImage = pygame.image.load("image/black_bg.png")
+SpaceShipImage = pygame.image.load("image/spaceship.png")             #기본크기 80x80
 SpaceShipImage = pygame.transform.scale(SpaceShipImage, (40,40))#크기 조정
 
 class BlackHole:

@@ -3,6 +3,7 @@ from math import dist
 from objects import BlackHole, SpaceShip
 import setting as s
 
+description = pygame.image.load("image/how_to_play.png")
 
 class Stage:
     def __init__(self, sc) -> None:
@@ -78,8 +79,9 @@ class Stage:
                 self.screen.blit(text,new_rect)
                 
 
-        elif self.PresentStage == s.STAGEALLCLEAR:      #올클리어
-            pass
+        elif self.PresentStage == s.STAGEDESCRIPTION:      #설명
+            new_rect = description.get_rect(center=(s.WIDTH/2,s.HEIGHT/2))
+            self.screen.blit(description,new_rect)
 
     
     def blackhole_collision(self, s:SpaceShip) -> bool:
