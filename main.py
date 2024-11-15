@@ -45,6 +45,7 @@ while not GameQuit:
             # list page
             elif stage.PresentStage == s.STAGELIST:
                 if event.key == pygame.K_z:
+                    stage.point = 0
                     stage.PresentStage = s.STAGEMAIN
                 elif event.key == pygame.K_SPACE or event.key == pygame.K_RETURN: #엔터키
                     player = SpaceShip(s.WIDTH-50,s.HEIGHT-50,screen)
